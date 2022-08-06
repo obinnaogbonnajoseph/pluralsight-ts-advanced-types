@@ -1,4 +1,4 @@
-import { Project, TextLayer, ImageLayer, LayerType, Size } from "./types";
+import { Project, TextLayer, ImageLayer, LayerType, Size, Layer } from "./types";
 import { render } from "./render";
 
 const projectSize: Size = {
@@ -27,14 +27,16 @@ const imageLayer: ImageLayer = {
   maxBounds: { width: projectSize.width }
 };
 
+const isTextLayer = (layer: Layer): layer is TextLayer => layer.type === LayerType.Text
+
 function setTextLayerProps(
   project: Project,
   id: string,
-  props: { [key: string]: any }
+  props: Partial<TextLayer>
 ) {
   const layer = project.layers.find(l => l.id === id);
 
-  if (layer) {
+  if (layer && isTextLayer(layer)) {
     Object.entries(props).forEach(([k, v]) => {
       (layer as any)[k] = v;
     });
@@ -47,7 +49,7 @@ const project: Project = {
 };
 
 setTextLayerProps(project, "10", {
-  shouldnotwork: false
+  text: "this is the updated text"
 });
 
 render(project);
