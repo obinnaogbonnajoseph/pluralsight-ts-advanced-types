@@ -69,9 +69,13 @@ function setSrc(layer: ImageLayer, value: string) {
   layer.src = value;
 }
 
+const isImageLayer = (layer: Layer): layer is ImageLayer => layer.type === LayerType.Image
+
 function setSrcOnSelection(layers: Layer[], value: string) {
   layers.forEach(layer => {
-    setSrc(layer, value);
+    if(isImageLayer(layer)) {
+      setSrc(layer, value);
+    }
   });
 }
 

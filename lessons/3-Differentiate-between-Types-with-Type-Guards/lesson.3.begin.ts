@@ -53,9 +53,13 @@ function setFontSize(layer: TextLayer, value: string | number) {
   }
 }
 
+const isTextLayer = (layer: Layer): layer is TextLayer => layer.type === LayerType.Text;
+
 function setFontSizeOnSelection(layers: Layer[], value: string | number) {
   layers.forEach(layer => {
-    setFontSize(layer, value);
+    if(isTextLayer(layer)) {
+      setFontSize(layer, value);
+    }
   });
 }
 

@@ -27,6 +27,10 @@ const imageLayer: ImageLayer = {
   maxBounds: { width: projectSize.width }
 };
 
+const setFontSize = (layer: TextLayer, value: string | number) => {
+  layer.fontSize = typeof value === "number" ? `${value}px` : value;
+}
+
 const project: Project = {
   layers: [imageLayer, textLayer],
   size: projectSize
