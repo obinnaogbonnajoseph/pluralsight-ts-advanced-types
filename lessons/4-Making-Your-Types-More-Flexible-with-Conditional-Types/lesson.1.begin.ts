@@ -35,6 +35,25 @@ const imageLayer: ImageLayer = {
   maxBounds: { width: projectSize.width }
 };
 
+function setMeta(layer: TextLayer, meta: TextMeta): void;
+function setMeta(layer: ImageLayer, meta: ImageMeta): void;
+function setMeta(
+  layer: ImageLayer | TextLayer,
+  meta: ImageMeta | TextMeta
+): void {
+  layer.meta = meta;
+}
+
+setMeta(textLayer, {
+  fontFoundry: "Own foundry",
+  licenseExpiration: new Date()
+})
+
+setMeta(imageLayer, {
+  format: "png",
+  origin: "Download"
+})
+
 const project: Project = {
   layers: [imageLayer, textLayer],
   size: projectSize

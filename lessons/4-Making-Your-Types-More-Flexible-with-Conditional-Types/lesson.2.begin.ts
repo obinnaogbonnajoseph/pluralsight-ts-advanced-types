@@ -35,12 +35,7 @@ const imageLayer: ImageLayer = {
   maxBounds: { width: projectSize.width }
 };
 
-function setMeta(layer: TextLayer, meta: TextMeta): void;
-function setMeta(layer: ImageLayer, meta: ImageMeta): void;
-function setMeta(
-  layer: ImageLayer | TextLayer,
-  meta: ImageMeta | TextMeta
-): void {
+const setMeta = <T extends TextLayer | ImageLayer>(layer: T, meta: T extends TextLayer ? TextMeta : ImageMeta) => {
   layer.meta = meta;
 }
 

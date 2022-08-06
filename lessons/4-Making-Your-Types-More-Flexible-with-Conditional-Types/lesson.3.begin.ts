@@ -6,7 +6,9 @@ const projectSize: Size = {
   height: 250
 };
 
-function createLayer(type: LayerType): TextLayer | ImageLayer {
+type FactoryLayer<T = LayerType> = T extends LayerType.Text ? TextLayer : ImageLayer
+
+function createLayer<T extends LayerType>(type: T): FactoryLayer<T> {
   if (type === LayerType.Text) {
     return {
       color: "#fff",
@@ -17,7 +19,7 @@ function createLayer(type: LayerType): TextLayer | ImageLayer {
       rotation: 0,
       text: "This is the default text",
       type: LayerType.Text
-    } as TextLayer;
+    } as FactoryLayer<T>;
   }
 
   return {
@@ -27,7 +29,7 @@ function createLayer(type: LayerType): TextLayer | ImageLayer {
     rotation: 0,
     src: "ps-dark.png",
     type: LayerType.Image
-  } as ImageLayer;
+  } as FactoryLayer<T>;
 }
 
 const textLayer = createLayer(LayerType.Text);
