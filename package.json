@@ -4,12 +4,11 @@
     "main": "index.js",
     "license": "MIT",
     "scripts": {
-        "run-generator-lesson-5": "cross-env ROOT=./ ts-node ./lessons/10-Using-Generators-for-Functions-That-Can-Be-Paused-or-Resumed/lesson.5.ts",
-        "build": "tsc"
+        "run-generator-lesson-5": "cross-env ROOT=./ ts-node ./lessons/10-Using-Generators-for-Functions-That-Can-Be-Paused-or-Resumed/lesson.5.ts"
     },
     "devDependencies": {
-        "@tsconfig/recommended": "^1.0.1",
         "@types/node": "^12.7.11",
+        "@types/probe-image-size": "^7.2.0",
         "@typescript-eslint/eslint-plugin": "^5.32.0",
         "@typescript-eslint/parser": "^5.32.0",
         "eslint": "^8.21.0"
@@ -20,6 +19,7 @@
         "image-size": "^0.8.3",
         "open": "^6.4.0",
         "probe-image-size": "^5.0.0",
+        "ts-node": "^8.4.1",
         "typescript": "^4.7.4"
     }
 }
