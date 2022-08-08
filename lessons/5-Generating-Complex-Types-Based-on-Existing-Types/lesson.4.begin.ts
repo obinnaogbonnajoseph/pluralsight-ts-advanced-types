@@ -1,4 +1,4 @@
-import { Project, TextLayer, ImageLayer, LayerType, Size } from "./types";
+import { TextLayer } from "./types";
 
 type FieldDescriptions<T> = {
   [key in keyof T]: string
@@ -12,7 +12,7 @@ const fieldDescriptions: FieldDescriptions<TextLayer> = {
   maxWidth: "The max width of the text layer",
   position: "The position of the top left part of the layer",
   rotation: "The rotation angle of the layer between 0 and 360",
-  type: "The type of the layer"
+  type: "The type of the layer",
 };
 
 Object.entries(fieldDescriptions).forEach(([field, description]) => {

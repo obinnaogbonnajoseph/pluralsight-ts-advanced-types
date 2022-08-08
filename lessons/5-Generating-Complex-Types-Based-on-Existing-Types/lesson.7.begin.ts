@@ -1,4 +1,5 @@
-import { TextLayer, LayerType } from "./types";
+import { render } from "./render";
+import { TextLayer, LayerType, Project } from "./types";
 
 const textLayer: TextLayer = {
   type: LayerType.Text,
@@ -19,5 +20,27 @@ function setColor(layer: TextLayer, color: string) {
   layer.color = color;
 }
 
-setText(textLayer, "Updated text");
-setColor(textLayer, "#fff");
+function projectAction<U extends (object | string)[]>(
+  name: string,
+  func: (...args: U) => void
+) {
+  return function wrapper(project: Project, ...args: U) {
+    func(...args);
+    project.lastAction = name;
+    project.lastUpdated = Date.now();
+  }
+} 
+
+const wrappedSetText = projectAction("setText", setText);
+
+const wrappedSetColor = projectAction("setColor", setColor);
+
+const project: Project = {
+  layers: [textLayer],
+  size: {height: 500, width: 500}
+}
+
+wrappedSetText(project, textLayer, "this is the new text!!!");
+wrappedSetColor(project, textLayer, "red")
+
+render(project);
