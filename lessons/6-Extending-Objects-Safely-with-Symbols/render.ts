@@ -3,7 +3,7 @@ import { createCanvas, loadImage, Canvas } from "canvas";
 import process from "process";
 import fs from "fs";
 import open from "open";
-const probe = require("probe-image-size");
+import probe from "probe-image-size";
 
 const BASE_IMAGE_PATH = `${process.env.ROOT}/lessons/common/images`;
 
@@ -23,7 +23,7 @@ async function renderImage(canvas: Canvas, layer: ImageLayer) {
 
   const image = await loadImage(fileBuffer);
 
-  const imageSize = probe.sync(fileBuffer);
+  const imageSize = probe.sync(fileBuffer) ?? {width: 500, height: 500} as probe.ProbeResult;
 
   const maxScaleSize = {
     width: layer.maxBounds.width || imageSize.height,
@@ -76,7 +76,7 @@ async function renderAsync(project: Project) {
       }
     } catch (err) {
       console.error(`Could not render layer with id ${layer.id}:`);
-      console.error(err.stack);
+      console.error((err as unknown as any).stack);
       process.exit(1);
     }
   }
