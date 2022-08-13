@@ -27,6 +27,27 @@ export function renderIterable(iterableProject: ProjectClass) {
 
 class ProjectClass {
   constructor(public size: Size, public layers: { [layerId: string]: Layer }) {}
+
+  [Symbol.iterator]() {
+    let pointer = 0;
+    const layers = Object.values(this.layers);
+
+    return {
+      next(): IteratorResult<Layer> {
+        if(pointer < layers.length) {
+          return {
+            done: false,
+            value: layers[pointer++]
+          }
+        } else {
+          return {
+            done: true,
+            value: null
+          }
+        }
+      }
+    }
+  }
 }
 
 const projectSize: Size = {
